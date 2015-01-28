@@ -29,10 +29,27 @@
 			<property name="password" value="root"/> 
 		</bean>
 		
+	    <!-- Mybatis的SessionFactory -->  
+        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+            <property name="dataSource" ref="dataSource"/>  
+            <property name="configLocation" value="classpath:mybatis-config.xml"/>  
+        </bean>  
+        
+        <!-- mapper bean -->  
+		<bean id="leaveDao" class="org.mybatis.spring.mapper.MapperFactoryBean">  
+		    <property name="mapperInterface" value="com.zhangkai.Activiti.dao.LeaveDao" />  
+		    <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
+		</bean> 
+		<bean id="bangongDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+			<property name="mapperInterface" value="com.zhangkai.Activiti.dao.BangongDao"/>
+			<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+		</bean>
+		
 		<!-- 事物 -->
 	    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 	        <property name="dataSource" ref="dataSource"/>
 	    </bean>
+	    
 		<!-- Activiti 配置 -->
 		<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
 		    <property name="dataSource" ref="dataSource" />
@@ -40,17 +57,19 @@
 		    <property name="databaseSchemaUpdate" value="true" />
 		    <property name="jobExecutorActivate" value="false" />
 	   </bean>
+	   
 	    <!-- Activiti Engine -->
 		<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
   			<property name="processEngineConfiguration" ref="processEngineConfiguration" />
 		</bean>
 		
-		<bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService" />
-	    <bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService" />
-	    <bean id="taskService" factory-bean="processEngine" factory-method="getTaskService" />
-	    <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />
-	    <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
-		
+		<bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService"/>
+	    <bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService"/>
+	    <bean id="formService" factory-bean="processEngine" factory-method="getFormService"/>
+	    <bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService"/>
+	    <bean id="taskService" factory-bean="processEngine" factory-method="getTaskService"/>
+	    <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService"/>
+	    <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService"/>
     
 </beans>
 

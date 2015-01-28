@@ -1,4 +1,4 @@
 /ApplicationContext.xml
 /activiti.cfg.xml
-/com
-/log4j.properties
+/com/
+/test/
