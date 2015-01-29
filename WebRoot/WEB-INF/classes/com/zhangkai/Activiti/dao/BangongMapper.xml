@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangkai.Activiti.dao.BangongDao">
+	<resultMap type="Bangong" id="bangongResultMap">
+		<id property="id" column="id"/>
+		<result property="bangongType" column="bangong_type"/>
+		<result property="number"  column="number"/>
+		<result property="userId" column="user_id"/>
+		<result property="processInstanceId" column="process_Instance_id"/>
+		<result property="reason" column="reason"/>
+	</resultMap>
+	
+	<insert id="insertBangong" >
+		<![CDATA[
+			INSERT INTO OA_BANGONG (ID,BANGONG_TYPE,NUMBER,USER_ID,PROCESS_INSTANCE_ID,REASON) VALUES (#{id},#{bangongType},#{number},#{userId},#{processInstanceId},#{reason})
+		 ]]>
+	</insert>
+	
+	<select id="getBangongByProcessInstanceId" resultType="Bangong" resultMap="bangongResultMap">
+		<![CDATA[
+			SELECT * from OA_BANGONG  
+                WHERE process_instance_id = #{processInstanceId}   
+		 ]]>
+	</select>
+	
+	<select id="getBangongById" resultType="Bangong" resultMap="bangongResultMap">
+		<![CDATA[
+			SELECT * from OA_BANGONG  
+                WHERE id = #{id}   
+		 ]]>
+	</select>
+</mapper>

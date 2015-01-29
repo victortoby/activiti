@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Leave" type="com.zhangkai.Activiti.model.Leave"/>
+		<typeAlias alias="Bangong" type="com.zhangkai.Activiti.model.Bangong"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/zhangkai/Activiti/dao/LeaveMapper.xml"/>
+		<mapper resource="com/zhangkai/Activiti/dao/BangongMapper.xml"/>
+	</mappers>
+</configuration>

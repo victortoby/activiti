@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+<timerEventDefinition>
+	<timeDate>2011-03-11T12:13:14</timeDate>
+	<timeDuration>P10D</timeDuration>
+	<timeCycle>R3/PT10H</timeCycle>
+</timerEventDefinition>
+<process id="financialReport" name="新建测试">
+	<startEvent id="theStart">
+		<terminateEventDefinition></terminateEventDefinition>
+	</startEvent>
+	<sequenceFlow id="flow1" targetRef="writeReportTask" sourceRef="theStart"></sequenceFlow>
+	<userTask id="writeReportTask"  name="用户task">
+		<documentation>
+			写一下随便
+		</documentation>
+		<potentialOwner>
+			<resourceAssignmentExpression>
+				<formalExpression>accountancy</formalExpression>
+			</resourceAssignmentExpression>
+		</potentialOwner>
+	</userTask>
+	
+	<sequenceFlow id='flow2' sourceRef='writeReportTask' targetRef='verifyReportTask' />
+
+    <userTask id="verifyReportTask" name="Verify monthly financial report" >
+      <documentation>
+        Verify monthly financial report composed by the accountancy department.
+        This financial report is going to be sent to all the company shareholders.
+      </documentation>
+      <potentialOwner>
+        <resourceAssignmentExpression>
+          <formalExpression>management</formalExpression>
+        </resourceAssignmentExpression>
+      </potentialOwner>
+    </userTask>
+
+    <sequenceFlow id='flow3' sourceRef='verifyReportTask' targetRef='theEnd' />
+
+    <endEvent id="theEnd" >
+    	e
+    </endEvent>
+	
+</process>
+</definitions>
